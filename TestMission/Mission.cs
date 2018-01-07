@@ -61,7 +61,7 @@ namespace TestMission
                         db.Query(sql);
                     }
                     foreach (string atribut in Atributs) MissionTime.Add(0);
-                    for(int i = 0; i < Atributs.Count; i++) save(command.ReciveUpdate(name, Atributs[i], MissionTime[i]), Atributs[i]);
+                    ReciveUpdate();
                     UpdateMissionTime();
                 }
                 
@@ -80,7 +80,10 @@ namespace TestMission
         }
         public void ReciveUpdate()
         {
-            for(int i = 0; i < Atributs.Count; i++) save(command.ReciveUpdate(name, Atributs[i], MissionTime[i]), Atributs[i]);
+            for (int i = 0; i < Atributs.Count; i++)
+            {
+                if(command.CheckTopicality(name, Atributs[i], MissionTime[i]) == 0) save(command.ReciveUpdate(name, Atributs[i], MissionTime[i]), Atributs[i]);
+            }
             UpdateMissionTime();
         }
         bool DBExist(string Name)

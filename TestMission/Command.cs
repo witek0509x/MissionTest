@@ -49,6 +49,13 @@ namespace TestMission
             foreach (string element in splited) Atributs.Add(element);
             return Atributs;
         }
+        public int CheckTopicality(string name, string atribut, float time)
+        {
+            command = "CheckTopicality " + name + " " + atribut + " " + time.ToString();
+            string respond = CommandExecute();
+            if (respond == "No") return 0;
+            else return 1;
+        }
         string CommandExecute()
         {
             string respond;
